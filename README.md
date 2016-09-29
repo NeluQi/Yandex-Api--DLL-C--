@@ -140,4 +140,4 @@ noun
 хозяйство
 ///
 ```
-Читай документацию <https://tech.yandex.ru/predictor/doc/dg/reference/complete-docpage/>
+Читай документацию <https://tech.yandex.ru/dictionary/doc/dg/reference/lookup-docpage/>
