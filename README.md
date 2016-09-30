@@ -15,7 +15,7 @@ YandexTranslate и YandexDictionary принимают json ответ и дес
 
   //Использование Переводчика
             YandexTranslate.objJsonTranslate obj0 = new YandexTranslate.objJsonTranslate(); //Создаем новый obj
-            obj0.SetKey("trnsl.1.1.20160930T112745Z.f98151ecc80639c2.3b87f0db6185e6229cf109e8b588eaa66900146c"); //Api ключб
+            obj0.SetKey("trnsl.1.1.20160930T112745Z.f98151ecc80639c2.3b87f0db6185e6229cf109e8b588eaa66900146c"); //Api ключь
             obj0.SetLang("ru"); //Язык для превода
             obj0.SetText("main");//Текст перевода
             obj0 = YandexTranslate.TranslateText(obj0); // Фукцияя перевода. 
@@ -26,9 +26,9 @@ YandexTranslate и YandexDictionary принимают json ответ и дес
 
  //Использование словоря
             YandexDictionary.objJsonDictionary obj1 = new YandexDictionary.objJsonDictionary(); //новый obj
-            obj1.SetKey("dict.1.1.20160929T170023Z.65422067ae841e9f.5903f00d113f6d2aaf7591f7f3a80f4b1b0012a7"); // Настройка -ключь
-            obj1.SetLang("ru-en");  // Настройка -язык
-            obj1.SetText("Красиво");  // Настройка -слово
+            obj1.SetKey("dict.1.1.20160929T170023Z.65422067ae841e9f.5903f00d113f6d2aaf7591f7f3a80f4b1b0012a7"); // Настройка-ключь
+            obj1.SetLang("ru-en");  // Настройка-язык
+            obj1.SetText("Красиво");  // Настройка-слово
             obj1 = YandexDictionary.DictionaryText(obj1); // Запрос
             Console.WriteLine(obj1.def[0].text); //Out: красиво
             Console.WriteLine(obj1.def[0].pos); //Out: наречие
