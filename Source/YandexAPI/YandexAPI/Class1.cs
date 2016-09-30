@@ -2,27 +2,41 @@
 using System.Text;
 using System.Net;
 using System.Web.Script.Serialization;
+using System;
 
 namespace YandexAPI
 {
     public class YandexTranslate //Переводчик
     {
-        public string key;
         public class objJsonTranslate
         {
             public int code { get; set; }
             public string lang { get; set; }
             public List<string> text { get; set; }
+            public string key;
+            public string Text;
+            public string Lang;
+            public string Format = "plain";
+            public string Options = "0";
+            public string Version = "v1.5";
 
+            public void SetKey(string SetKey) { key = SetKey;  }
+            public void SetText(string SetText) { Text = SetText; }
+            public void SetLang(string SetLang) { Lang = SetLang; }
+            public void SetFormat(string SetFormat) { Format = SetFormat; }
+            public void SetOptions(string SetOptions) { Options = SetOptions; }
+            public void SetVersion(string SetVersion) { Version = SetVersion; }
         }
 
-        public static objJsonTranslate TranslateText(string key, string Text, string Lang, string Format="plain", string Options="0", string v = "v1.5") {
+            public static objJsonTranslate TranslateText(objJsonTranslate Obj)
+            {
                 var Ser = new JavaScriptSerializer();
-                objJsonTranslate EndTranslate = Ser.Deserialize<objJsonTranslate>(Encoding.UTF8.GetString(new WebClient().DownloadData("https://translate.yandex.net/api/" + v + "/tr.json/translate?key=" + key + "&text=" + Text + "&lang=" + Lang + "&format=" + Format + "&options=" + Options)));
+                objJsonTranslate EndTranslate = Ser.Deserialize<objJsonTranslate>(Encoding.UTF8.GetString(new WebClient().DownloadData("https://translate.yandex.net/api/" + Obj.Version + "/tr.json/translate?key=" + Obj.key + "&text=" + Obj.Text + "&lang=" + Obj.Lang + "&format=" + Obj.Format + "&options=" + Obj.Options)));
                 return EndTranslate;
-        }
+            }
     }
-    public class YandexDictionary { //Cловарь
+    public class YandexDictionary//Cловарь
+    { 
 
         public class Head
         {
@@ -65,22 +79,25 @@ namespace YandexAPI
             public List<Tr> tr { get; set; }
         }
 
-        public class RootObject
+        public class objJsonDictionary
         {
             public Head head { get; set; }
             public List<Def> def { get; set; }
+            public string Key;
+            public string Text;
+            public string Lang;
+            public void SetKey(string SetKey) { Key = SetKey; }
+            public void SetText(string SetText) { Text = SetText; }
+            public void SetLang(string SetLang) { Lang = SetLang; }
+
         }
 
 
-        public static RootObject DictionaryText(string key,string text, string lang)
+        public static objJsonDictionary DictionaryText(objJsonDictionary obj)
         {
             var Ser = new JavaScriptSerializer();
-            RootObject EndTranslate = Ser.Deserialize<RootObject>(Encoding.UTF8.GetString(new WebClient().DownloadData("https://dictionary.yandex.net/api/v1/dicservice.json/lookup?key=" + key +  "&lang=" + lang + "&text=" + text)));
+            objJsonDictionary EndTranslate = Ser.Deserialize<objJsonDictionary>(Encoding.UTF8.GetString(new WebClient().DownloadData("https://dictionary.yandex.net/api/v1/dicservice.json/lookup?key=" + obj.Key +  "&lang=" + obj.Lang + "&text=" + obj.Text)));
             return EndTranslate;
         }
-         
-
-
-
     }
 }
